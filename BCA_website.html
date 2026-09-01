@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My App Studio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+        
+        /* Navigation */
+        nav {
+            background: #1a1a1a;
+            padding: 20px;
+            border-bottom: 2px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        nav a:hover {
+            background: #333;
+            color: #00d4ff;
+        }
+        nav a.active {
+            background: #00d4ff;
+            color: #0a0a0a;
+            font-weight: bold;
+        }
+        
+        /* Pages */
+        .page {
+            display: none;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            animation: fadeIn 0.5s;
+        }
+        .page.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Home Page */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .hero img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #00d4ff;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+            margin-bottom: 30px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            font-size: 20px;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        
+        /* Apps Page */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+        }
+        .app-card {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
+        }
+        .app-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            background: #333;
+        }
+        .app-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .app-card p {
+            color: #aaa;
+            margin-bottom: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .download-btn:hover {
+            transform: scale(1.05);
+        }
+        .app-version {
+            color: #666;
+            font-size: 12px;
+            margin-top: 10px;
+            display: block;
+        }
+        
+        /* Comments Page */
+        .comment-section {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid #333;
+        }
+        .comment-section h2 {
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .comment-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .comment-section input,
+        .comment-section textarea {
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+        .comment-section textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        .comment-section button {
+            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .comment-section button:hover {
+            transform: scale(1.02);
+        }
+        .comment-list {
+            margin-top: 30px;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+        .comment-item {
+            background: #0a0a0a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+        .comment-item strong {
+            color: #00d4ff;
+        }
+        .comment-item p {
+            margin-top: 5px;
+            color: #ccc;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            border-top: 1px solid #1a1a1a;
+            margin-top: 40px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            nav ul {
+                gap: 15px;
+            }
+            nav a {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li><a class="active" onclick="showPage('home')">🏠 Home</a></li>
+        <li><a onclick="showPage('apps')">📱 Apps</a></li>
+        <li><a onclick="showPage('comments')">💬 Contact</a></li>
+    </ul>
+</nav>
+
+<!-- ===== HOME PAGE ===== -->
+<div id="home" class="page active">
+    <div class="hero">
+        <img src="https://via.placeholder.com/200/333/00d4ff?text=Your+Photo" alt="Your Photo">
+        <h1>Welcome to My App Studio</h1>
+        <p>Hi! I'm a developer who builds cool Android apps. Browse my creations below and download what you like. Every app is built with passion and careful attention to user experience.</p>
+        <a href="#" onclick="showPage('apps')" class="download-btn" style="background: linear-gradient(135deg, #7b2ffc, #00d4ff);">Explore My Apps →</a>
+    </div>
+</div>
+
+<!-- ===== APPS PAGE ===== -->
+<div id="apps" class="page">
+    <h2 style="text-align:center; font-size: 36px; margin-bottom: 10px;">📱 My Apps</h2>
+    <p style="text-align:center; color: #aaa; margin-bottom: 30px;">Click download to get the APK file</p>
+    
+    <div class="app-grid">
+        <!-- App 1 -->
+        <div class="app-card">
+            <img src="https://via.placeholder.com/400x200/333/00d4ff?text=App+1+Screenshot" alt="App 1">
+            <h3>Task Manager Pro</h3>
+            <p>Organize your daily tasks with this sleek, minimalist to-do app with cloud sync and reminders.</p>
+            <a href="taskmanager.apk" download class="download-btn">⬇️ Download APK</a>
+            <span class="app-version">Version 2.1.0 | 12 MB</span>
+        </div>
+        
+        <!-- App 2 -->
+        <div class="app-card">
+            <img src="https://via.placeholder.com/400x200/333/ff6b6b?text=App+2+Screenshot" alt="App 2">
+            <h3>Weather Buddy</h3>
+            <p>Get real-time weather updates, radar maps, and 7-day forecasts with a beautiful material design.</p>
+            <a href="weather.apk" download class="download-btn">⬇️ Download APK</a>
+            <span class="app-version">Version 1.8.3 | 8 MB</span>
+        </div>
+        
+        <!-- App 3 -->
+        <div class="app-card">
+            <img src="https://via.placeholder.com/400x200/333/51cf66?text=App+3+Screenshot" alt="App 3">
+            <h3>Flash Cards</h3>
+            <p>Learn languages and study with spaced repetition flashcards. Perfect for students and self-learners.</p>
+            <a href="flashcards.apk" download class="download-btn">⬇️ Download APK</a>
+            <span class="app-version">Version 3.0.1 | 15 MB</span>
+        </div>
+    </div>
+</div>
+
+<!-- ===== COMMENTS PAGE ===== -->
+<div id="comments" class="page">
+    <div class="comment-section">
+        <h2>💬 Leave Your Feedback</h2>
+        <p style="color: #aaa; margin-bottom: 20px;">Have questions, suggestions, or found a bug? Let me know!</p>
+        
+        <form id="commentForm" onsubmit="addComment(event)">
+            <input type="text" id="nameInput" placeholder="Your Name" required>
+            <input type="email" id="emailInput" placeholder="Your Email (optional)">
+            <textarea id="commentInput" placeholder="Write your message here..." required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+        
+        <div class="comment-list" id="commentList">
+            <h3 style="color: #888; margin-bottom: 15px;">Recent Messages</h3>
+            <div class="comment-item">
+                <strong>Sarah J.</strong>
+                <p>Great apps! The Task Manager Pro is exactly what I needed. Keep up the good work! 🚀</p>
+            </div>
+            <div class="comment-item">
+                <strong>Mike R.</strong>
+                <p>Loving Weather Buddy. Any chance you'll add a widget for the home screen?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>© 2026 My App Studio | Built with ❤️ using HTML, CSS & JavaScript</p>
+</footer>
+
+<script>
+    // Page Navigation
+    function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        // Show selected page
+        document.getElementById(pageId).classList.add('active');
+        
+        // Update nav links
+        document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+        // Find the clicked link and make it active
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.textContent.toLowerCase().includes(pageId) || 
+                (pageId === 'home' && link.textContent.includes('Home')) ||
+                (pageId === 'apps' && link.textContent.includes('Apps')) ||
+                (pageId === 'comments' && link.textContent.includes('Contact'))) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    // Comment System (saves in browser localStorage)
+    function addComment(event) {
+        event.preventDefault();
+        
+        const name = document.getElementById('nameInput').value.trim();
+        const comment = document.getElementById('commentInput').value.trim();
+        
+        if (!name || !comment) {
+            alert('Please fill in your name and message.');
+            return;
+        }
+        
+        // Create comment HTML
+        const commentHTML = `
+            <div class="comment-item">
+                <strong>${name}</strong>
+                <p>${comment}</p>
+            </div>
+        `;
+        
+        // Add to the comment list
+        const list = document.getElementById('commentList');
+        list.insertAdjacentHTML('beforeend', commentHTML);
+        
+        // Clear form
+        document.getElementById('nameInput').value = '';
+        document.getElementById('commentInput').value = '';
+        
+        // Show confirmation
+        alert('Thank you for your feedback! 🎉');
+    }
+</script>
+
+</body>
+</html>
