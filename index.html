@@ -20,7 +20,7 @@
         /* Navigation */
         nav {
             background: #1a1a1a;
-            padding: 20px;
+            padding: 15px;
             border-bottom: 2px solid #333;
             position: sticky;
             top: 0;
@@ -30,18 +30,21 @@
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 20px;
             max-width: 800px;
             margin: 0 auto;
+            flex-wrap: wrap;
         }
         nav a {
             color: #e0e0e0;
             text-decoration: none;
-            font-size: 18px;
-            padding: 10px 20px;
+            font-size: 16px;
+            padding: 10px 15px;
             border-radius: 8px;
             transition: all 0.3s;
             cursor: pointer;
+            white-space: nowrap;
+            display: inline-block;
         }
         nav a:hover {
             background: #333;
@@ -57,7 +60,7 @@
         .page {
             display: none;
             max-width: 900px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 0 20px;
             animation: fadeIn 0.5s;
         }
@@ -73,60 +76,61 @@
         /* Home Page */
         .hero {
             text-align: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
         }
         .hero img {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid #00d4ff;
             box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
         }
         .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
+            font-size: 36px;
+            margin-bottom: 15px;
             background: linear-gradient(135deg, #00d4ff, #7b2ffc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .hero p {
-            font-size: 20px;
+            font-size: 18px;
             color: #aaa;
             max-width: 600px;
-            margin: 0 auto 30px;
+            margin: 0 auto 25px;
             line-height: 1.6;
         }
         
         /* Apps Page */
         .app-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
             padding: 20px 0;
         }
         .app-card {
             background: #1a1a1a;
             border-radius: 16px;
-            padding: 25px;
+            padding: 20px;
             border: 1px solid #333;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .app-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
         }
         .app-card img {
             width: 100%;
-            height: 200px;
+            height: 180px;
             object-fit: cover;
             border-radius: 10px;
             margin-bottom: 15px;
             background: #333;
         }
         .app-card h3 {
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 10px;
             color: #fff;
         }
@@ -140,14 +144,15 @@
             display: inline-block;
             background: linear-gradient(135deg, #00d4ff, #7b2ffc);
             color: white;
-            padding: 12px 25px;
+            padding: 12px 20px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
             transition: transform 0.2s;
             border: none;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
+            text-align: center;
         }
         .download-btn:hover {
             transform: scale(1.05);
@@ -163,7 +168,7 @@
         .comment-section {
             background: #1a1a1a;
             border-radius: 16px;
-            padding: 40px;
+            padding: 30px;
             border: 1px solid #333;
         }
         .comment-section h2 {
@@ -173,28 +178,29 @@
         .comment-section form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
         }
         .comment-section input,
         .comment-section textarea {
-            padding: 15px;
+            padding: 12px;
             border-radius: 8px;
             border: 1px solid #333;
             background: #0a0a0a;
             color: #e0e0e0;
             font-size: 16px;
+            width: 100%;
         }
         .comment-section textarea {
-            min-height: 150px;
+            min-height: 120px;
             resize: vertical;
         }
         .comment-section button {
             background: linear-gradient(135deg, #00d4ff, #7b2ffc);
             color: white;
-            padding: 15px;
+            padding: 12px;
             border: none;
             border-radius: 8px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.2s;
@@ -203,7 +209,7 @@
             transform: scale(1.02);
         }
         .comment-list {
-            margin-top: 30px;
+            margin-top: 25px;
             border-top: 1px solid #333;
             padding-top: 20px;
         }
@@ -225,26 +231,66 @@
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: #666;
             border-top: 1px solid #1a1a1a;
             margin-top: 40px;
         }
         
-        /* Responsive */
-        @media (max-width: 600px) {
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav {
+                padding: 10px;
+            }
             nav ul {
-                gap: 15px;
+                gap: 10px;
             }
             nav a {
                 font-size: 14px;
                 padding: 8px 12px;
             }
+            .hero {
+                padding: 30px 15px;
+            }
+            .hero img {
+                width: 120px;
+                height: 120px;
+            }
             .hero h1 {
-                font-size: 32px;
+                font-size: 28px;
+            }
+            .hero p {
+                font-size: 16px;
             }
             .app-grid {
                 grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .app-card {
+                padding: 15px;
+            }
+            .app-card img {
+                height: 160px;
+            }
+            .comment-section {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            nav ul {
+                gap: 5px;
+            }
+            nav a {
+                font-size: 12px;
+                padding: 6px 8px;
+            }
+            .hero h1 {
+                font-size: 24px;
+            }
+            .download-btn {
+                padding: 10px 15px;
+                font-size: 13px;
             }
         }
     </style>
@@ -263,44 +309,44 @@
 <!-- ===== HOME PAGE ===== -->
 <div id="home" class="page active">
     <div class="hero">
-        <img src="Assets/images/logo.png" alt="logo.png">
+        <img src="Assets/images/logo.png" alt="My App Studio Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect width=%22150%22 height=%22150%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E📱%3C/text%3E%3C/svg%3E'">
         <h1>Welcome to My App Studio</h1>
-        <p>Hi! I'm a bored guy who decided to build some free apps to showcase how much innovation i have browse at your own enjoyment :) .</p>
+        <p>Hi! I'm a bored guy who decided to build some free apps to showcase how much innovation I have. Browse at your own enjoyment :)</p>
         <a href="#" onclick="showPage('apps')" class="download-btn" style="background: linear-gradient(135deg, #7b2ffc, #00d4ff);">Explore My Apps →</a>
     </div>
 </div>
 
 <!-- ===== APPS PAGE ===== -->
 <div id="apps" class="page">
-    <h2 style="text-align:center; font-size: 36px; margin-bottom: 10px;">📱 My Apps</h2>
+    <h2 style="text-align:center; font-size: 32px; margin-bottom: 10px;">📱 My Apps</h2>
     <p style="text-align:center; color: #aaa; margin-bottom: 30px;">Click download to get the APK file</p>
     
     <div class="app-grid">
         <!-- App 1 -->
         <div class="app-card">
-            <img src="Assets/images/drawing.png" alt="App 1">
+            <img src="Assets/images/drawing.png" alt="Drawing App" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🎨%3C/text%3E%3C/svg%3E'">
             <h3>Drawing</h3>
-            <p>check out my fancy drawing app i am sure it will be to your liking.</p>
+            <p>Check out my fancy drawing app. I'm sure it will be to your liking.</p>
             <a href="taskmanager.apk" download class="download-btn">⬇️ Download APK</a>
             <span class="app-version">Version 2.1.0 | 12 MB</span>
         </div>
         
         <!-- App 2 -->
-       <div class="app-card">
-    <img src="Assets/images/video_editor.png" alt="App 2">
-    <h3>Video Cutter</h3>
-    <p>A wonderful video editing app for your TikTok, YouTube, or status stories.</p>
-    <a href="https://github.com/BCAprogrammer/bcaprogrammer.github.io/releases/download/vid/app-x86_64-release.apk" class="download-btn">⬇️ Download APK</a>
-    <span class="app-version">Version 1.0.0 | 8 MB</span>
-</div>
+        <div class="app-card">
+            <img src="Assets/images/video_editor.png" alt="Video Cutter" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🎬%3C/text%3E%3C/svg%3E'">
+            <h3>Video Cutter</h3>
+            <p>A wonderful video editing app for your TikTok, YouTube, or status stories.</p>
+            <a href="https://github.com/BCAprogrammer/bcaprogrammer.github.io/releases/download/vid/app-x86_64-release.apk" class="download-btn">⬇️ Download APK</a>
+            <span class="app-version">Version 1.0.0 | 8 MB</span>
+        </div>
         
         <!-- App 3 -->
         <div class="app-card">
-            <img src="Assets/images/TV.png" alt="App 3">
+            <img src="Assets/images/TV.png" alt="TV App" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E📺%3C/text%3E%3C/svg%3E'">
             <h3>TV</h3>
-            <p>Learn languages and study with spaced repetition flashcards. Perfect for students and self-learners.</p>
-            <a href="flashcards.apk" download class="download-btn">⬇️ Download APK</a>
-            <span class="app-version">Version 3.0.1 | 15 MB</span>
+            <p>Watch live TV channels with my IPTV player. Stream your favorite channels.</p>
+            <a href="https://bcaprogrammer.github.io/tv/" class="download-btn">📺 Open TV Player</a>
+            <span class="app-version">Version 1.0.0 | Online</span>
         </div>
     </div>
 </div>
@@ -320,15 +366,6 @@
         
         <div class="comment-list" id="commentList">
             <h3 style="color: #888; margin-bottom: 15px;">Recent Messages</h3>
-            <div class="comment-item">
-                <strong>B1.</strong>
-                <p>wonderful definately not a fake costumer found this apps great 🚀</p>
-            </div>
-            <div class="comment-item">
-                <strong>B2.</strong>
-                <p>Loved it, definately not a fake costumer 2 wants more apps </p>
-            </div>
-            
         </div>
     </div>
 </div>
@@ -348,37 +385,20 @@
         
         // Update nav links
         document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-        // Find the clicked link and make it active
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.textContent.toLowerCase().includes(pageId) || 
-                (pageId === 'home' && link.textContent.includes('Home')) ||
-                (pageId === 'apps' && link.textContent.includes('Apps')) ||
-                (pageId === 'comments' && link.textContent.includes('Contact'))) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    // Comment System (saves in browser localStorage)
-    <script>
-    // Page Navigation
-    function showPage(pageId) {
-        // Hide all pages
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        // Show selected page
-        document.getElementById(pageId).classList.add('active');
         
-        // Update nav links
-        document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-        // Find the clicked link and make it active
-        document.querySelectorAll('nav a').forEach(link => {
-            if (link.textContent.toLowerCase().includes(pageId) || 
-                (pageId === 'home' && link.textContent.includes('Home')) ||
-                (pageId === 'apps' && link.textContent.includes('Apps')) ||
-                (pageId === 'comments' && link.textContent.includes('Contact'))) {
+        // Find and activate the correct nav link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            const linkText = link.textContent.toLowerCase();
+            if ((pageId === 'home' && linkText.includes('home')) ||
+                (pageId === 'apps' && linkText.includes('apps')) ||
+                (pageId === 'comments' && linkText.includes('contact'))) {
                 link.classList.add('active');
             }
         });
+        
+        // Scroll to top when changing pages
+        window.scrollTo(0, 0);
     }
     
     // Escape HTML to prevent XSS attacks
@@ -406,20 +426,39 @@
         const saved = JSON.parse(localStorage.getItem('siteComments') || '[]');
         const list = document.getElementById('commentList');
         
-        // Keep the "Recent Messages" heading
+        // Clear existing comments but keep the heading
         const heading = list.querySelector('h3');
         list.innerHTML = '';
         list.appendChild(heading);
         
-        // Add saved comments
-        saved.forEach(comment => {
-            list.insertAdjacentHTML('beforeend', `
-                <div class="comment-item">
-                    <strong>${escapeHTML(comment.name)}</strong>
-                    <p>${escapeHTML(comment.text)}</p>
-                </div>
-            `);
-        });
+        // Add default comments if none saved
+        if (saved.length === 0) {
+            const defaultComments = [
+                { name: 'B1.', text: 'Wonderful! Definitely not a fake customer. Found these apps great 🚀' },
+                { name: 'B2.', text: 'Loved it! Definitely not a fake customer 2. Want more apps!' }
+            ];
+            
+            defaultComments.forEach(comment => {
+                list.insertAdjacentHTML('beforeend', `
+                    <div class="comment-item">
+                        <strong>${escapeHTML(comment.name)}</strong>
+                        <p>${escapeHTML(comment.text)}</p>
+                    </div>
+                `);
+            });
+            
+            saveComments();
+        } else {
+            // Add saved comments
+            saved.forEach(comment => {
+                list.insertAdjacentHTML('beforeend', `
+                    <div class="comment-item">
+                        <strong>${escapeHTML(comment.name)}</strong>
+                        <p>${escapeHTML(comment.text)}</p>
+                    </div>
+                `);
+            });
+        }
     }
     
     // Add new comment
@@ -465,7 +504,6 @@
     
     // Load comments when page starts
     document.addEventListener('DOMContentLoaded', loadComments);
-</script>
 </script>
 
 </body>
