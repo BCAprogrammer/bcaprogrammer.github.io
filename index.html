@@ -296,8 +296,8 @@
         
         <!-- App 3 -->
         <div class="app-card">
-            <img src="https://via.placeholder.com/400x200/333/51cf66?text=App+3+Screenshot" alt="App 3">
-            <h3>Flash Cards</h3>
+            <img src="Assets/images/TV.png" alt="App 3">
+            <h3>TV</h3>
             <p>Learn languages and study with spaced repetition flashcards. Perfect for students and self-learners.</p>
             <a href="flashcards.apk" download class="download-btn">⬇️ Download APK</a>
             <span class="app-version">Version 3.0.1 | 15 MB</span>
@@ -328,6 +328,7 @@
                 <strong>B2.</strong>
                 <p>Loved it, definately not a fake costumer 2 wants more apps </p>
             </div>
+            
         </div>
     </div>
 </div>
@@ -359,6 +360,69 @@
     }
     
     // Comment System (saves in browser localStorage)
+    <script>
+    // Page Navigation
+    function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+        // Show selected page
+        document.getElementById(pageId).classList.add('active');
+        
+        // Update nav links
+        document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+        // Find the clicked link and make it active
+        document.querySelectorAll('nav a').forEach(link => {
+            if (link.textContent.toLowerCase().includes(pageId) || 
+                (pageId === 'home' && link.textContent.includes('Home')) ||
+                (pageId === 'apps' && link.textContent.includes('Apps')) ||
+                (pageId === 'comments' && link.textContent.includes('Contact'))) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    // Escape HTML to prevent XSS attacks
+    function escapeHTML(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+    
+    // Save comments to localStorage
+    function saveComments() {
+        const items = document.querySelectorAll('.comment-item');
+        const comments = [];
+        items.forEach(item => {
+            comments.push({
+                name: item.querySelector('strong').textContent,
+                text: item.querySelector('p').textContent
+            });
+        });
+        localStorage.setItem('siteComments', JSON.stringify(comments));
+    }
+    
+    // Load comments from localStorage
+    function loadComments() {
+        const saved = JSON.parse(localStorage.getItem('siteComments') || '[]');
+        const list = document.getElementById('commentList');
+        
+        // Keep the "Recent Messages" heading
+        const heading = list.querySelector('h3');
+        list.innerHTML = '';
+        list.appendChild(heading);
+        
+        // Add saved comments
+        saved.forEach(comment => {
+            list.insertAdjacentHTML('beforeend', `
+                <div class="comment-item">
+                    <strong>${escapeHTML(comment.name)}</strong>
+                    <p>${escapeHTML(comment.text)}</p>
+                </div>
+            `);
+        });
+    }
+    
+    // Add new comment
     function addComment(event) {
         event.preventDefault();
         
@@ -370,25 +434,38 @@
             return;
         }
         
-        // Create comment HTML
+        // Create sanitized comment
         const commentHTML = `
             <div class="comment-item">
-                <strong>${name}</strong>
-                <p>${comment}</p>
+                <strong>${escapeHTML(name)}</strong>
+                <p>${escapeHTML(comment)}</p>
             </div>
         `;
         
-        // Add to the comment list
         const list = document.getElementById('commentList');
         list.insertAdjacentHTML('beforeend', commentHTML);
         
+        // Save to localStorage
+        saveComments();
+        
         // Clear form
         document.getElementById('nameInput').value = '';
+        document.getElementById('emailInput').value = '';
         document.getElementById('commentInput').value = '';
         
-        // Show confirmation
-        alert('Thank you for your feedback! 🎉');
+        // Show success message
+        const successMsg = document.createElement('div');
+        successMsg.style.cssText = 'background: #00d4ff20; border: 1px solid #00d4ff; padding: 10px; border-radius: 8px; margin-top: 15px; text-align: center;';
+        successMsg.textContent = '✅ Thank you for your feedback!';
+        event.target.appendChild(successMsg);
+        
+        // Remove success message after 3 seconds
+        setTimeout(() => successMsg.remove(), 3000);
     }
+    
+    // Load comments when page starts
+    document.addEventListener('DOMContentLoaded', loadComments);
+</script>
 </script>
 
 </body>
