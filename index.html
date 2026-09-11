@@ -226,6 +226,7 @@
     .app-card:nth-child(1) { animation-delay: 0.05s; }
     .app-card:nth-child(2) { animation-delay: 0.15s; }
     .app-card:nth-child(3) { animation-delay: 0.25s; }
+    .app-card:nth-child(4) { animation-delay: 0.35s; }
 
     .app-card:hover {
       border-color: var(--accent);
@@ -424,7 +425,7 @@
   <section class="stats">
     <div class="container stats-grid">
       <div class="stat">
-        <div class="stat-number">3+</div>
+        <div class="stat-number">4+</div>
         <div class="stat-label">Apps Available</div>
       </div>
       <div class="stat">
@@ -443,11 +444,19 @@
     <div class="container">
       <div class="section-title">Apps</div>
 
-      <!-- Featured app -->
+      <!-- ═══════════════════════════════════════════════════════ -->
+      <!-- FEATURED APP: SHARCI                                    -->
+      <!-- ═══════════════════════════════════════════════════════ -->
       <div class="featured-app">
         <div class="featured-image">
-          <img src="assets/images/sharci-screenshot.png" alt="Sharci drawing app screenshot"
+          <!-- ▼▼▼ PUT THE SHARCI SCREENSHOT HERE ▼▼▼
+               Upload your image to: assets/images/sharci-screenshot.png
+               Then make sure the src below matches that exact filename.
+               If the file is missing, the ✏️ emoji will show instead. -->
+          <img src="assets/images/sharci-screenshot.png"
+               alt="Sharci drawing app screenshot"
                onerror="this.parentElement.innerHTML='<div class=&quot;fallback&quot;>✏️</div>'">
+          <!-- ▲▲▲ END SHARCI SCREENSHOT ▲▲▲ -->
         </div>
         <div class="featured-content">
           <span class="featured-badge">Featured</span>
@@ -460,11 +469,19 @@
       <!-- App grid -->
       <div class="apps">
 
-        <!-- Video Cutter -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!-- APP 1: VIDEO CUTTER                                 -->
+        <!-- ═══════════════════════════════════════════════════ -->
         <div class="app-card">
           <div class="app-image">
-            <img src="assets/images/Tv.png" alt="Video Cutter icon"
+            <!-- ▼▼▼ PUT THE VIDEO CUTTER PICTURE HERE ▼▼▼
+                 Upload your image to: assets/images/video-cutter.png
+                 (or reuse the existing Tv.png by changing the src
+                 to "assets/images/Tv.png"). -->
+            <img src="Assets/images/video-editor.png"
+                 alt="Video Cutter preview"
                  onerror="this.parentElement.innerHTML='<div class=&quot;fallback&quot;>🎬</div>'">
+            <!-- ▲▲▲ END VIDEO CUTTER PICTURE ▲▲▲ -->
           </div>
           <div class="app-content">
             <div class="app-icon">🎬</div>
@@ -480,11 +497,18 @@
           </div>
         </div>
 
-        <!-- TV Player -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!-- APP 2: TV PLAYER                                    -->
+        <!-- ═══════════════════════════════════════════════════ -->
         <div class="app-card">
           <div class="app-image">
-            <img src="assets/images/Tv.png" alt="TV Player icon"
+            <!-- ▼▼▼ PUT THE TV PLAYER PICTURE HERE ▼▼▼
+                 Upload your image to: assets/images/tv-player.png
+                 (or keep using "assets/images/Tv.png"). -->
+            <img src="Assets/images/TV.png"
+                 alt="TV Player preview"
                  onerror="this.parentElement.innerHTML='<div class=&quot;fallback&quot;>📺</div>'">
+            <!-- ▲▲▲ END TV PLAYER PICTURE ▲▲▲ -->
           </div>
           <div class="app-content">
             <div class="app-icon">📺</div>
@@ -500,6 +524,33 @@
           </div>
         </div>
 
+        <!-- ═══════════════════════════════════════════════════ -->
+        <!-- APP 3: GABAY  ← NEW APP                             -->
+        <!-- ═══════════════════════════════════════════════════ -->
+        <div class="app-card">
+          <div class="app-image">
+            <!-- ▼▼▼ PUT THE GABAY PICTURE HERE ▼▼▼
+                 Upload your image to: assets/images/gabay.png -->
+            <img src="assets/images/gabay.png"
+                 alt="Gabay poetry app preview"
+                 onerror="this.parentElement.innerHTML='<div class=&quot;fallback&quot;>📜</div>'">
+            <!-- ▲▲▲ END GABAY PICTURE ▲▲▲ -->
+          </div>
+          <div class="app-content">
+            <div class="app-icon">📜</div>
+            <h3>Gabay</h3>
+            <p>A home for Somali poetry — read, write, and share classic and modern gabay.</p>
+            <div class="app-meta">
+              <span>v1.0.0</span>
+              <span>Free</span>
+            </div>
+            <div class="btn-row">
+              <!-- Change the href below to wherever your Gabay app/APK lives -->
+              <a href="#" class="btn">Download</a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -508,7 +559,7 @@
   <section id="about">
     <div class="container">
       <div class="section-title">About</div>
-      <p>Barkhad is a collection of free, lightweight apps and tools. No trackers, no ads, no nonsense — just things that work.</p>
+      <p>this the personal collection of free apps and tools made by barkhad.</p>
     </div>
   </section>
 
