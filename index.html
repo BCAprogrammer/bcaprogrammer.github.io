@@ -1,529 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My App Studio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            min-height: 100vh;
-        }
-        
-        /* Navigation */
-        nav {
-            background: #1a1a1a;
-            padding: 15px;
-            border-bottom: 2px solid #333;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            max-width: 800px;
-            margin: 0 auto;
-            flex-wrap: wrap;
-        }
-        nav a {
-            color: #e0e0e0;
-            text-decoration: none;
-            font-size: 16px;
-            padding: 10px 15px;
-            border-radius: 8px;
-            transition: all 0.3s;
-            cursor: pointer;
-            white-space: nowrap;
-            display: inline-block;
-        }
-        nav a:hover {
-            background: #333;
-            color: #00d4ff;
-        }
-        nav a.active {
-            background: #00d4ff;
-            color: #0a0a0a;
-            font-weight: bold;
-        }
-        
-        /* Pages */
-        .page {
-            display: none;
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 0 20px;
-            animation: fadeIn 0.5s;
-        }
-        .page.active {
-            display: block;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Home Page */
-        .hero {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        .hero img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #00d4ff;
-            box-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
-            margin-bottom: 25px;
-        }
-        .hero h1 {
-            font-size: 36px;
-            margin-bottom: 15px;
-            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero p {
-            font-size: 18px;
-            color: #aaa;
-            max-width: 600px;
-            margin: 0 auto 25px;
-            line-height: 1.6;
-        }
-        
-        /* Apps Page */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            padding: 20px 0;
-        }
-        .app-card {
-            background: #1a1a1a;
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid #333;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .app-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
-        }
-        .app-card img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            background: #333;
-        }
-        .app-card h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-        .app-card p {
-            color: #aaa;
-            margin-bottom: 15px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-        .download-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
-            color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: transform 0.2s;
-            border: none;
-            cursor: pointer;
-            font-size: 14px;
-            text-align: center;
-        }
-        .download-btn:hover {
-            transform: scale(1.05);
-        }
-        .app-version {
-            color: #666;
-            font-size: 12px;
-            margin-top: 10px;
-            display: block;
-        }
-        
-        /* Comments Page */
-        .comment-section {
-            background: #1a1a1a;
-            border-radius: 16px;
-            padding: 30px;
-            border: 1px solid #333;
-        }
-        .comment-section h2 {
-            margin-bottom: 20px;
-            color: #fff;
-        }
-        .comment-section form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .comment-section input,
-        .comment-section textarea {
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            font-size: 16px;
-            width: 100%;
-        }
-        .comment-section textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        .comment-section button {
-            background: linear-gradient(135deg, #00d4ff, #7b2ffc);
-            color: white;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        .comment-section button:hover {
-            transform: scale(1.02);
-        }
-        .comment-list {
-            margin-top: 25px;
-            border-top: 1px solid #333;
-            padding-top: 20px;
-        }
-        .comment-item {
-            background: #0a0a0a;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            border-left: 3px solid #00d4ff;
-        }
-        .comment-item strong {
-            color: #00d4ff;
-        }
-        .comment-item p {
-            margin-top: 5px;
-            color: #ccc;
-        }
-        
-        /* Footer */
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: #666;
-            border-top: 1px solid #1a1a1a;
-            margin-top: 40px;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            nav {
-                padding: 10px;
-            }
-            nav ul {
-                gap: 10px;
-            }
-            nav a {
-                font-size: 14px;
-                padding: 8px 12px;
-            }
-            .hero {
-                padding: 30px 15px;
-            }
-            .hero img {
-                width: 120px;
-                height: 120px;
-            }
-            .hero h1 {
-                font-size: 28px;
-            }
-            .hero p {
-                font-size: 16px;
-            }
-            .app-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .app-card {
-                padding: 15px;
-            }
-            .app-card img {
-                height: 160px;
-            }
-            .comment-section {
-                padding: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            nav ul {
-                gap: 5px;
-            }
-            nav a {
-                font-size: 12px;
-                padding: 6px 8px;
-            }
-            .hero h1 {
-                font-size: 24px;
-            }
-            .download-btn {
-                padding: 10px 15px;
-                font-size: 13px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barkhad — Apps & Tools</title>
+<meta name="description" content="Free apps and tools built for everyday use.">
+<style>
+  :root {
+    --bg: #0f1117;
+    --card: #161a22;
+    --border: #232836;
+    --text: #e8eaed;
+    --muted: #8b93a7;
+    --accent: #e94560;
+    --accent-hover: #c73e54;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header {
+    padding: 80px 0 60px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+  header h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+  header h1 span { color: var(--accent); }
+  header p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Section */
+  section { padding: 60px 0; }
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  /* App grid */
+  .apps {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .app-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .app-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .app-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), #6a5acd);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .app-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .app-card p {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
+  .app-meta {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .app-meta span { margin-right: 12px; }
+  .btn {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    transition: background 0.2s;
+  }
+  .btn:hover { background: var(--accent-hover); }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-outline:hover {
+    background: var(--card);
+    border-color: var(--accent);
+  }
+  .btn-row { display: flex; gap: 10px; }
+  .btn-row .btn { flex: 1; }
+
+  /* Footer */
+  footer {
+    padding: 40px 0;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 600px) {
+    header { padding: 60px 0 40px; }
+    header h1 { font-size: 32px; }
+    .apps { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav>
-    <ul>
-        <li><a class="active" onclick="showPage('home')">🏠 Home</a></li>
-        <li><a onclick="showPage('apps')">📱 Apps</a></li>
-        <li><a onclick="showPage('comments')">💬 Contact</a></li>
-    </ul>
-</nav>
-    <nav>
-    <ul>
-        <li><a class="active" onclick="showPage('home')">🏠 Home</a></li>
-        <li><a onclick="showPage('apps')">📱 Apps</a></li>
-        <li><a onclick="showPage('tv')">📺 TV</a></li>
-        <li><a onclick="showPage('comments')">💬 Contact</a></li>
-    </ul>
-</nav>
+<header>
+  <div class="container">
+    <h1>Barkhad<span>.</span></h1>
+    <p>Free apps and tools — built for everyday use. No ads, no nonsense.</p>
+  </div>
+</header>
 
-<!-- ===== HOME PAGE ===== -->
-<div id="home" class="page active">
-    <div class="hero">
-        <img src="Assets/images/logo.png" alt="My App Studio Logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22%3E%3Crect width=%22150%22 height=%22150%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2260%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E📱%3C/text%3E%3C/svg%3E'">
-        <h1>Welcome to My App Studio</h1>
-        <p>Hi! I'm a bored guy who decided to build some free apps to showcase how much innovation I have. Browse at your own enjoyment :)</p>
-        <a href="#" onclick="showPage('apps')" class="download-btn" style="background: linear-gradient(135deg, #7b2ffc, #00d4ff);">Explore My Apps →</a>
-    </div>
-</div>
-   
+<section>
+  <div class="container">
+    <div class="section-title">Apps</div>
+    <div class="apps">
 
-<!-- ===== APPS PAGE ===== -->
-<div id="apps" class="page">
-    <h2 style="text-align:center; font-size: 32px; margin-bottom: 10px;">📱 My Apps</h2>
-    <p style="text-align:center; color: #aaa; margin-bottom: 30px;">Click download to get the APK file</p>
-    
-    <div class="app-grid">
-        <!-- App 1 -->
-        <div class="app-card">
-            <img src="Assets/images/sharci1.png" alt="Drawing App" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🎨%3C/text%3E%3C/svg%3E'">
-            <h3>sharci</h3>
-            <p>Check out my fancy drawing app. I'm sure it will be to your liking.</p>
-            <a href="sharci.apk" download class="download-btn">⬇️ Download APK</a>
-            <span class="app-version">Version 2.1.0 | 12 MB</span>
+      <div class="app-card">
+        <div class="app-icon">✏️</div>
+        <h3>Sharci</h3>
+        <p>A simple, fast drawing app. Sketch, doodle, and export your work.</p>
+        <div class="app-meta">
+          <span>v2.1.0</span>
+          <span>12 MB</span>
         </div>
-        
-        <!-- App 2 -->
-        <div class="app-card">
-            <img src="Assets/images/video_editor.png" alt="Video Cutter" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E🎬%3C/text%3E%3C/svg%3E'">
-            <h3>Video Cutter</h3>
-            <p>A wonderful video editing app for your TikTok, YouTube, or status stories.</p>
-            <a href="https://github.com/BCAprogrammer/bcaprogrammer.github.io/releases/download/vid/app-x86_64-release.apk" class="download-btn">⬇️ Download APK</a>
-            <span class="app-version">Version 1.0.0 | 8 MB</span>
+        <div class="btn-row">
+          <a href="sharci.apk" class="btn">Download</a>
         </div>
-        
-        <!-- App 3 -->
-        <div class="app-card">
-            <img src="Assets/images/TV.png" alt="TV App" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22200%22%3E%3Crect width=%22400%22 height=%22200%22 fill=%22%23333%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 font-size=%2240%22 fill=%22%2300d4ff%22 text-anchor=%22middle%22 dominant-baseline=%22middle%22%3E📺%3C/text%3E%3C/svg%3E'">
-            <h3>TV</h3>
-            <p>Watch live TV channels with my IPTV player. Stream your favorite channels.</p>
-            <a href="app-debug.apk" class="download-btn">📺 TV app</a>
-            <span class="app-version">Version 1.0.0 | Online</span>
-        </div>
-    </div>
-</div>
-    
+      </div>
 
-<!-- ===== COMMENTS PAGE ===== -->
-<div id="comments" class="page">
-    <div class="comment-section">
-        <h2>💬 Leave Your Feedback</h2>
-        <p style="color: #aaa; margin-bottom: 20px;">Have questions, suggestions, or found a bug? Let me know!</p>
-        
-        <form id="commentForm" onsubmit="addComment(event)">
-            <input type="text" id="nameInput" placeholder="Your Name" required>
-            <input type="email" id="emailInput" placeholder="Your Email (optional)">
-            <textarea id="commentInput" placeholder="Write your message here..." required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-        
-        <div class="comment-list" id="commentList">
-            <h3 style="color: #888; margin-bottom: 15px;">Recent Messages</h3>
+      <div class="app-card">
+        <div class="app-icon">🎬</div>
+        <h3>Video Cutter</h3>
+        <p>Trim and edit videos for TikTok, YouTube, or status stories.</p>
+        <div class="app-meta">
+          <span>v1.0.0</span>
+          <span>8 MB</span>
         </div>
-    </div>
-</div>
-    <!-- ===== TV PAGE ===== -->
-<div id="tv" class="page">
-    <div class="hero" style="text-align: center; padding: 60px 20px;">
-        <img src="Assets/images/TV.png" alt="TV" style="width: 150px; height: 150px; border-radius: 20px; object-fit: cover; border: 4px solid #00d4ff; box-shadow: 0 0 40px rgba(0, 212, 255, 0.3); margin-bottom: 30px;">
-        <h1 style="font-size: 36px; margin-bottom: 20px; background: linear-gradient(135deg, #00d4ff, #7b2ffc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📺 Live TV Player</h1>
-        <p style="font-size: 18px; color: #aaa; max-width: 600px; margin: 0 auto 30px; line-height: 1.6;">Watch live TV channels on my custom IPTV player. Free and works on any device.</p>
-        
-        <a href="https://bcaprogrammer.github.io/tv/" target="_blank" class="download-btn" style="background: linear-gradient(135deg, #7b2ffc, #00d4ff); font-size: 20px; padding: 15px 30px;">
-            🚀 Open TV Player
-        </a>
-        
-        <p style="margin-top: 20px; color: #666; font-size: 14px;">Opens in new tab</p>
-    </div>
-</div>
+        <div class="btn-row">
+          <a href="https://github.com/BCAprogrammer/bcaprogrammer.github.io/releases/download/vid/app-x86_64-release.apk" class="btn">Download</a>
+        </div>
+      </div>
 
-<!-- Footer -->
+      <div class="app-card">
+        <div class="app-icon">📺</div>
+        <h3>TV Player</h3>
+        <p>Watch live TV channels on your phone. Works on any device.</p>
+        <div class="app-meta">
+          <span>v1.0.0</span>
+          <span>Online</span>
+        </div>
+        <div class="btn-row">
+          <a href="/tv/" class="btn">Open</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <footer>
-    <p>© 2026 My App Studio | Built with ❤️ using HTML, CSS & JavaScript</p>
+  <div class="container">
+    <p>© 2026 Barkhad · <a href="mailto:contact@barkhad.top">contact@barkhad.top</a></p>
+  </div>
 </footer>
-
-<script>
-    //show page
- function showPage(pageId) {
-    // Hide all pages
-    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-    // Show selected page
-    document.getElementById(pageId).classList.add('active');
-    
-    // Update nav links
-    document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-    document.querySelectorAll('nav a').forEach(link => {
-        const linkText = link.textContent.toLowerCase();
-        if ((pageId === 'home' && linkText.includes('home')) ||
-            (pageId === 'apps' && linkText.includes('apps')) ||
-            (pageId === 'tv' && linkText.includes('tv')) ||
-            (pageId === 'comments' && linkText.includes('contact'))) {
-            link.classList.add('active');
-        }
-    });
-}
-    
-    // Escape HTML to prevent XSS attacks
-    function escapeHTML(str) {
-        const div = document.createElement('div');
-        div.textContent = str;
-        return div.innerHTML;
-    }
-    
-    // Save comments to localStorage
-    function saveComments() {
-        const items = document.querySelectorAll('.comment-item');
-        const comments = [];
-        items.forEach(item => {
-            comments.push({
-                name: item.querySelector('strong').textContent,
-                text: item.querySelector('p').textContent
-            });
-        });
-        localStorage.setItem('siteComments', JSON.stringify(comments));
-    }
-    
-    // Load comments from localStorage
-    function loadComments() {
-        const saved = JSON.parse(localStorage.getItem('siteComments') || '[]');
-        const list = document.getElementById('commentList');
-        
-        // Clear existing comments but keep the heading
-        const heading = list.querySelector('h3');
-        list.innerHTML = '';
-        list.appendChild(heading);
-        
-        // Add default comments if none saved
-        if (saved.length === 0) {
-            const defaultComments = [
-                { name: 'B1.', text: 'Wonderful! Definitely not a fake customer. Found these apps great 🚀' },
-                { name: 'B2.', text: 'Loved it! Definitely not a fake customer 2. Want more apps!' }
-            ];
-            
-            defaultComments.forEach(comment => {
-                list.insertAdjacentHTML('beforeend', `
-                    <div class="comment-item">
-                        <strong>${escapeHTML(comment.name)}</strong>
-                        <p>${escapeHTML(comment.text)}</p>
-                    </div>
-                `);
-            });
-            
-            saveComments();
-        } else {
-            // Add saved comments
-            saved.forEach(comment => {
-                list.insertAdjacentHTML('beforeend', `
-                    <div class="comment-item">
-                        <strong>${escapeHTML(comment.name)}</strong>
-                        <p>${escapeHTML(comment.text)}</p>
-                    </div>
-                `);
-            });
-        }
-    }
-    
-    // Add new comment
-    function addComment(event) {
-        event.preventDefault();
-        
-        const name = document.getElementById('nameInput').value.trim();
-        const comment = document.getElementById('commentInput').value.trim();
-        
-        if (!name || !comment) {
-            alert('Please fill in your name and message.');
-            return;
-        }
-        
-        // Create sanitized comment
-        const commentHTML = `
-            <div class="comment-item">
-                <strong>${escapeHTML(name)}</strong>
-                <p>${escapeHTML(comment)}</p>
-            </div>
-        `;
-        
-        const list = document.getElementById('commentList');
-        list.insertAdjacentHTML('beforeend', commentHTML);
-        
-        // Save to localStorage
-        saveComments();
-        
-        // Clear form
-        document.getElementById('nameInput').value = '';
-        document.getElementById('emailInput').value = '';
-        document.getElementById('commentInput').value = '';
-        
-        // Show success message
-        const successMsg = document.createElement('div');
-        successMsg.style.cssText = 'background: #00d4ff20; border: 1px solid #00d4ff; padding: 10px; border-radius: 8px; margin-top: 15px; text-align: center;';
-        successMsg.textContent = '✅ Thank you for your feedback!';
-        event.target.appendChild(successMsg);
-        
-        // Remove success message after 3 seconds
-        setTimeout(() => successMsg.remove(), 3000);
-    }
-    
-    // Load comments when page starts
-    document.addEventListener('DOMContentLoaded', loadComments);
-</script>
 
 </body>
 </html>
